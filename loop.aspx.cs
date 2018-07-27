@@ -148,7 +148,7 @@ using System.Collections;
 
 
 
-        protected void Continue_Click(object sender, EventArgs e)
+        protected void Forward_Click(object sender, EventArgs e)
         {
 
             if (currentquestion <= randomNumber) //the number of times the page irritates 

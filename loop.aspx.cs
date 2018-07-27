@@ -13,10 +13,7 @@ using System.Collections;
 
     public partial class loop : System.Web.UI.Page
 
-    {   public static string subject = "This will be added later"; 
-        public static string projectName2 = "This will be added later";
-        public static string webmasterlink = "If you have any questions or problems, please contact the webmaster by email at <a href=mailto:support@media-query.com?subject=" + subject + ">support@media-query.com</a> and include '" + projectName2 + "' in the email so we can better serve you."; 
-        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["CMGResearchConnectionString"].ConnectionString);
+    {   SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["yourConnectionString"].ConnectionString);
         public string LID= "1";
         public string qnum; 
         public static string items;
@@ -42,9 +39,9 @@ using System.Collections;
      
         {    
             "",
-            "Andrews Federal Credit Union",
-            "Navy Federal Credit Union",
-            "Pentagon Federal Credit Union"
+            "Peaches",
+            "Pears",
+            "Grapes"
 
         }; //this array is for competitive list
 
@@ -64,15 +61,13 @@ using System.Collections;
         {
             
     
-            //LID = Convert.ToString(Request.QueryString["LID"]); //for this test I used the QueryString for future we would use cookie below
-            //LID = Request.Cookies["MusicResearch"]["LID"]; 
-            string goback = Convert.ToString(Request.QueryString["yes"]);
+       
 
 
             if (!IsPostBack)
             { //initilize in this 'if' so that update panel does not update entire page and refresh values 
                 numberChecked.Clear(); //clear the numberChecked for the next page
-                String cmdSelect = "SELECT randomstringDTW, randomstringCheck, currentquestion15 FROM Data_805 WHERE loginId = @LID;";
+                String cmdSelect = "SELECT randomstringDTW, randomstringCheck, currentquestion15 FROM Data_yourDB WHERE loginId = @LID;";
                 SqlCommand cmd = new SqlCommand(cmdSelect, con);      
                 cmd.Parameters.AddWithValue("@LID", LID);
                 con.Open();
@@ -177,7 +172,7 @@ using System.Collections;
                 }
                
                 string num = string.Join(",", numberChecked);
-                String statement = "UPDATE Data_805 SET randomstringDTW = @randomstringDTW, randomstringCheck = @randomstringCheck, currentquestion15 = @currentq, q15_" + index + " = @q15, q15b_" + index + " =@q15b, q15av_" + index + " =@q15av WHERE loginId = @ID;"; //creates the sql query statement 
+                String statement = "UPDATE Data_yourDB SET randomstringDTW = @randomstringDTW, randomstringCheck = @randomstringCheck, currentquestion15 = @currentq, q15_" + index + " = @q15, q15b_" + index + " =@q15b, q15av_" + index + " =@q15av WHERE loginId = @ID;"; //creates the sql query statement 
                 SqlCommand cmd = new SqlCommand(statement, con); //provided to issue the statement to sql and avoid sql injection 
                 cmd.Parameters.AddWithValue("@randomstringDTW", randomDTW); //adds value to the above varirables to further prevent sql injection 
                 cmd.Parameters.AddWithValue("@randomstringCheck", randomCheck);
@@ -195,7 +190,7 @@ using System.Collections;
                 //{
                 //    qnum = numberChecked[i];
               
-                //    String qstatement = "UPDATE Data_805 SET q15_" + index + "_" + qnum + " = @checkList  WHERE loginId = @ID;"; //creates the sql query statement 
+                //    String qstatement = "UPDATE Data_yourDB SET q15_" + index + "_" + qnum + " = @checkList  WHERE loginId = @ID;"; //creates the sql query statement 
                 //    SqlCommand qcmd = new SqlCommand(qstatement, con);        
                 //    qcmd.Parameters.AddWithValue("@ID", LID);
                 //    qcmd.Parameters.AddWithValue("@checkList", qnum);
@@ -266,7 +261,7 @@ using System.Collections;
                     index = Int32.Parse(arrayIndex);
                     items = setArray[index]; //this loops through 'items' (if there are any) 
 
-                    String statement = "UPDATE Data_805 SET currentquestion15 = @currentq WHERE loginId = @ID;"; //creates the sql query statement 
+                    String statement = "UPDATE Data_yourDB SET currentquestion15 = @currentq WHERE loginId = @ID;"; //creates the sql query statement 
                     SqlCommand cmd = new SqlCommand(statement, con); //provided to issue the statement to sql and avoid sql injection 
                     cmd.Parameters.AddWithValue("@ID", LID);    
                     cmd.Parameters.AddWithValue("@currentq", currentquestion);
@@ -321,7 +316,7 @@ using System.Collections;
             index = Int32.Parse(arrayIndex); //parse into an array to be passed into answerarray index
 
 
-            String cmdGoback = "SELECT q15_" + index + ", q15b_" + index + ", q15av_" + index + " FROM Data_805 WHERE loginId = @LID;";
+            String cmdGoback = "SELECT q15_" + index + ", q15b_" + index + ", q15av_" + index + " FROM Data_yourDB WHERE loginId = @LID;";
             SqlCommand cmdGb = new SqlCommand(cmdGoback, con);
             cmdGb.Parameters.AddWithValue("@LID", LID);
             con.Open();

@@ -11,9 +11,9 @@
 </head>
 <body>
     <div class="w3-row-padding"> 
-    <form runat="server" class="cmgform" id="form1" language="JavaScript" name="FrontPage_Form1"> 
-    <div class="surveyFrame">
-        <div id="progressbar" class="progress"></div>
+    <form runat="server" class="yourform" id="form1" language="JavaScript" name="FrontPage_Form1"> 
+    <div class="Frame">
+     
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true">
         </asp:ScriptManager>
         <asp:UpdatePanel runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
@@ -26,7 +26,7 @@
 
                     <asp:textbox runat="server" name="q15av" ID="q15av"> </asp:textbox>
 
-                   <p class="centered">How would you rate the advertisement for <u><%=items%></u>?                                    
+                   <p class="centered">How do you feel about <u><%=items%></u>?                                    
                 </p>
                  <div class="control-group">
                     <asp:RadioButtonList Id="q15b" name="q15b" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" CssClass="radiobuttonrow">
@@ -43,7 +43,7 @@
                     </asp:RadioButtonList>
                      </div>
 
-                <p class="centered">Which times of day do you like to watch the news?</p>
+                <p class="centered">Which times of day do you like to eat?</p>
                 <div class="control-group">
                     <asp:CheckBoxList ID="CheckBoxList1" runat="server" CssClass="checkbutton"> 
                         <asp:ListItem Text=""></asp:ListItem>
@@ -64,10 +64,10 @@
         </asp:UpdatePanel>
         <div class="footer">
                 <div class="submitbuttons">
-                  <asp:Button ID="Cont" runat="server" OnClick="Continue_Click" class="button" Text="Next" />
+                  <asp:Button ID="Cont" runat="server" OnClick="Forward_Click" class="button" Text="Next" />
                   <asp:Button ID="Back" runat="server" OnClick="Back_Click" class="button" Text="Back" />
                 </div>
-             <div class="weblink"><%=webmasterlink%></div>
+         
           
              
           
